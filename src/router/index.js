@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 const home = () => import('../views/home/home')
 const category = () => import('../views/category/category')
-const shopcart = () => import('../views/cartshop/shopcart')
+const shopcart = () => import('../views/shopcart/shopcart')
 const profile = () => import('../views/profile/profile')
 const detail = () => import('../views/detail/detail')
 

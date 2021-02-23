@@ -1,5 +1,6 @@
 <template>
-    <div id="hy-swiper">
+    <div>
+      <div id="hy-swiper">
       <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <slot></slot>
       </div>
@@ -11,8 +12,8 @@
         </slot>
       </div>
     </div>
+    </div>
 </template>
-
 <script>
 	export default {
 		name: "Swiper",
@@ -50,7 +51,7 @@
 
         // 2.开启定时器
         this.startTimer();
-      }, 3000)
+      }, 1000)
     },
     methods: {
 		  /**

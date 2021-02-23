@@ -27,6 +27,7 @@ export default {
   methods: {
     titleclick(index){
       this.currentindex = index
+      this.$emit('titleclick',index)
     },
     backclick(){
       this.$router.back()
@@ -36,7 +37,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .title{
     display: flex;
   }

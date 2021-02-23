@@ -33,6 +33,7 @@ import TabControl from 'components/content/tabcontrol/TabControl.vue'
 import GoodsList from '../../components/content/goods/GoodsList.vue'
 import Scroll from 'components/common/scroll/Scroll'
 import BackTop from '../../components/common/backtop/BackTop.vue'
+import {debounce} from 'common/utils'
 
 export default {
   name:'home',
@@ -59,7 +60,8 @@ export default {
       currentType:'pop',
       isshowscroll:false,
       tabOffsetTop :0,
-      
+      saveY:0,
+      itemimagelister:null
     }
   },
   created () {
@@ -67,15 +69,29 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
-
     
   },
   mounted () {
-    const refresh = this.debounce(this.$refs.scroll.refresh,50)
-    this.$bus.$on('itemimageload',() =>{
+    // 防抖操作
+    const refresh = debounce(this.$refs.scroll.refresh,100)
+    this.itemimagelister = () =>{
       refresh()
-    })
+    }
+    this.$bus.$on('itemimageload',this.itemimagelister)
     
+  },
+  activated () {
+    // console.log(this.saveY);
+    this.$refs.scroll.refresh()
+
+    this.$refs.scroll.scrollTo(0,this.saveY,0)
+  },
+  deactivated () {
+    // 保存y值
+    this.saveY = this.$refs.scroll.getY()
+
+    // 取消全局事件的监听
+    this.$bus.$off('itemimageload',this.itemimagelister)
   },
   computed: {
     showGoods(){

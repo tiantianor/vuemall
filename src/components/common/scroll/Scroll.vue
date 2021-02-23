@@ -50,6 +50,9 @@ export default {
       // console.log('aaaaaaa');
       this.scroll && this.scroll.refresh()
     },
+    getY(){
+      return this.scroll.y ? this.scroll.y:0
+    }
     
   }
 }
